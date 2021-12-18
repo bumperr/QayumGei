@@ -4,8 +4,8 @@
  * See the file license.txt for copying permission.
  */
 var sfgjs = {
-    DEFAULT_RADIUS : 12,
-    DEFAULT_COLOR : "#228b22",
+    DEFAULT_RADIUS : 15,
+    DEFAULT_COLOR : "#ffc107",
     DEFAULT_EDGE_COLOR : "#000000",
     DEFAULT_SELECTED_COLOR : "#0000FF",
     DEFAULT_MARKED_COLOR : "#FF9933",
@@ -125,7 +125,7 @@ var sfgjs = {
             this.canvas.sfg = this;
             this.canvas.ctx = this.ctx;
 
-            this.grid = true;
+            this.grid = false;
             this.scale = 1.5;
             this.transX = 0;
             this.transY = 0;
@@ -179,22 +179,22 @@ var sfgjs = {
             this.addNode(450,150); this.addNode(550,150);
             this.addNode(350,300); this.addNode(250,300);
 
-            var e = new sfgjs.ArcEdge(this.nodes[0],this.nodes[1]);e.label="g1"; this.addEdge(e);
-            e = new sfgjs.ArcEdge(this.nodes[1],this.nodes[2]);e.label="g2"; this.addEdge(e);
-            e = new sfgjs.ArcEdge(this.nodes[2],this.nodes[3]);e.label="g3"; this.addEdge(e);
-            e = new sfgjs.ArcEdge(this.nodes[3],this.nodes[4]);e.label="g4"; this.addEdge(e);
-            e = new sfgjs.ArcEdge(this.nodes[4],this.nodes[5]);e.label="g5"; this.addEdge(e);
+            var e = new sfgjs.ArcEdge(this.nodes[0],this.nodes[1]);e.label="A0"; this.addEdge(e);
+            e = new sfgjs.ArcEdge(this.nodes[1],this.nodes[2]);e.label="A1"; this.addEdge(e);
+            e = new sfgjs.ArcEdge(this.nodes[2],this.nodes[3]);e.label="A2"; this.addEdge(e);
+            e = new sfgjs.ArcEdge(this.nodes[3],this.nodes[4]);e.label="A3"; this.addEdge(e);
+            e = new sfgjs.ArcEdge(this.nodes[4],this.nodes[5]);e.label="A4"; this.addEdge(e);
 
-            e = new sfgjs.ArcEdge(this.nodes[2],this.nodes[1]);e.label="h1"; this.addEdge(e);
+            e = new sfgjs.ArcEdge(this.nodes[2],this.nodes[1]);e.label="B0"; this.addEdge(e);
             e.controlPoint.y += 60;
-            e = new sfgjs.ArcEdge(this.nodes[4],this.nodes[3]);e.label="h2"; this.addEdge(e);
+            e = new sfgjs.ArcEdge(this.nodes[4],this.nodes[3]);e.label="B1"; this.addEdge(e);
             e.controlPoint.y += 60;
 
-            e = new sfgjs.ArcEdge(this.nodes[5],this.nodes[6]);e.label="g6"; this.addEdge(e);
-            e = new sfgjs.ArcEdge(this.nodes[6],this.nodes[7]);e.label="g7"; this.addEdge(e);
-            e = new sfgjs.ArcEdge(this.nodes[7],this.nodes[6]);e.label="h4"; this.addEdge(e);
+            e = new sfgjs.ArcEdge(this.nodes[5],this.nodes[6]);e.label="A5"; this.addEdge(e);
+            e = new sfgjs.ArcEdge(this.nodes[6],this.nodes[7]);e.label="A6"; this.addEdge(e);
+            e = new sfgjs.ArcEdge(this.nodes[7],this.nodes[6]);e.label="B2"; this.addEdge(e);
             e.controlPoint.y += 60;
-            e = new sfgjs.ArcEdge(this.nodes[7],this.nodes[1]);e.label="g8"; this.addEdge(e);
+            e = new sfgjs.ArcEdge(this.nodes[7],this.nodes[1]);e.label="A7"; this.addEdge(e);
             this.redraw();
         }else{
             alert("canvas not supported!");
@@ -804,6 +804,11 @@ sfgjs.SFG.prototype = {
         this.scale -= 0.2;
         this.redraw();
     },
+    reFit : function(){
+        this.scale = 1.5;
+        this.redraw();
+    },
+ 
     clear : function(){
         this.nodes = [];
         this.edges = [];

@@ -1,20 +1,30 @@
 <html>
     <head>
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-ios.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&display=swap" rel="stylesheet">
+
+      
         <link rel="stylesheet" href="sfg.css" type="text/css"/>
         <script type="text/javascript" src="sfg.js"></script>
         <style>
             .col-lg-8{
                 position: static;
             }
+            table.beta td{display: block;height: 40px;}
+            table.beta tr{display: block;float: left;}
+            html { scroll-behavior: smooth;}
+
+            .w3-passion {font-family: 'Passion One', cursive;}
+            .w3-peach{background-color: #FFE5B4;}
             /* #canvas {
                 width: 100%;
             } */
-            
+            .w3-light-peach{background-color: #fff0d4;}
         </style>
         <script type="text/javascript">
             var sfg = null;
@@ -56,13 +66,13 @@
 
             function showForwardPaths(){
                 var title = document.getElementById("pathslisttitle");
-                title.innerHTML = "Forward Paths";
+                title.innerHTML = "Status:Forward Paths";
                 showPaths(paths,"Path");
             }
 
             function showLoops(){
                 var title = document.getElementById("pathslisttitle");
-                title.innerHTML = "Loops";
+                title.innerHTML = "Status:Loop Paths";
                 showPaths(loops,"Loop");
             }
 
@@ -122,6 +132,9 @@
                         }
                         return str;
                     }
+                    document.getElementById('answer').style.display='block'
+                    document.getElementById('showAnswer').style.display='block'
+                    window.scrollTo(0,document.body.scrollHeight);
                     document.getElementById("results");
                     results.innerHTML = "";
                     var symHTML = "<h3> Symbolic </h3>";
@@ -148,8 +161,12 @@
                     loops = result.loops;
                     srcLabel = result.srcLabel;
                     destLabel = result.destLabel;
+                    
                     showLoops();
+                    
                 });
+
+                
             }
 
             function refreshSymbolsTable(){
@@ -227,99 +244,183 @@
                     }
                 }
             }
+            function accordian(id) {
+                        var x = document.getElementById(id);
+                        if (x.className.indexOf("w3-show") == -1) {
+                            x.className += " w3-show";
+                            x.previousElementSibling.className = x.previousElementSibling.className.replace("w3-peach", "w3-light-grey");
+                            window.scrollTo(0,document.body.scrollHeight);
+                        } else { 
+                            x.className = x.className.replace(" w3-show", "");
+                            x.previousElementSibling.className = x.previousElementSibling.className.replace("w3-light-grey", "w3-peach");
+                        }
+                        }
+            
+                    function download_image(){
+                    var canvas = document.getElementById("canvas");
+                    image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+                    var link = document.createElement('a');
+                    link.download = "my-image.png";
+                    link.href = image;
+                    link.click();
+                    }
         </script>
   </head>
-  <body onload = "init()">
-    <div class="w3-bar w3-black w3-mobile w3-border">
-        <a href="." class="w3-bar-item w3-button">Home</a>
-        <a href="#" class="w3-bar-item w3-button" id= "zoomIn" onclick="sfg.zoomIn()" >Zoom In (+)</a>
-        <a href="#" class="w3-bar-item w3-button"  id= "zoomOut" onclick="sfg.zoomOut()"  >Zoom Out (-)</a>
-        <a href="#" class="w3-bar-item w3-button">About</a>
-      
-      
-      </div>
-      <div class="w3-sidebar w3-bar-block w3-light-grey" style="width:10%">
-      
-        <a href="#" class="w3-bar-item w3-button" id= "addNode" onclick="addNode()"> ADD NODE</a>
-        <a href="#" class="w3-bar-item w3-button" id= "addLineEdge" onclick="addLineEdge()" >ADD LINE EDGE</a>
-        <a href="#" class="w3-bar-item w3-button" id= "addArcEdge" onclick="addArcEdge()">ADD ARC EDGE</a>
-        <a href="#" class="w3-bar-item w3-button" id= "deleteItem" onclick="deleteItem()">DELETE SELECTED</a>
-        <a href="#" class="w3-bar-item w3-button" id= "clear" onclick="clearAll()">CLEAR</a>
-        <a href="#" class="w3-bar-item w3-button" id= "editLabel" onclick="editLabel()">EDIT LABEL</a>
-        <a href="#" class="w3-bar-item w3-button"id= "solve" onclick="solve()">SOLVE</a>
-        
-      </div>
+  <body onload = "init()"  style="background-color:#FFDDCA"  >
+    <header class="w3-container  w3-padding" style="background-color:#C48189;" id="myHeader">
+        <i onclick="w3_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i> 
+        <div class="w3-center">
+            <h3>Muhammad Qaiyum bin Jamaludin (B081810522)</h3>
+            <h1 class="w3-xxxlarge w3-animate-bottom">Signal Flow Graph Solver</h1>
+            <div class="w3-padding-32">
+                <button class="w3-btn w3-xlarge w3-dark-grey w3-hover-light-grey" onclick="document.getElementById('info').style.display='block'" style="font-weight:900;">Learn More</button>
+            </div>
+        </div>
 
-    
-    
-<div style="margin-left:10%">
 
-    <div class="w3-row">
+
+        <!-- The Modal -->
+        <div id="info" class="w3-modal">
+        <div class="w3-modal-content w3-animate-bottom">
+            <header class="w3-container w3-teal ">
+                <span onclick="document.getElementById('info').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                <h2>Signal Flow Graph (S.F.G)</h2>
+              </header>
+          
+              <div class="w3-container w3-light-grey">
+                <h2>What is Signal Flow Graph?</h2>
+                <p >A signal-flow graph (SFG), also known as a Mason graph, is a type of directed network in which the nodes represent system variables and the branches (edges, arcs, or arrows) reflect functional links between nodes. </p>
+                <p >SFGs are most typically used to depict signal flow in a cyber-physical system that includes a physical system and its controller(s).</p>
+                <h2>Why use Signal Flow Graph Solver?</h2>
+                <p>Sparked from the problem faced by engineering students, this program was design in a way to help them solve complicated Signal Flow Graph with responsive graphical interface.</p>
+                <h2>How to use the program?</h2>
+                <p>By accessing the sidebar, the users could add/remove nodes, connect nodes, set gain values for connections,view signal paths in foward or loop configuration,produce a solution and download the drawn SFG  </p>
+              </div>
+          
+              <footer class="w3-container w3-teal">
+                <p>Created by Muhammad Qaiyum bin Jamaludin (B081810522) </p>
+              </footer>
+        </div>
+        </div>
+    </header>
     
-    <div class="w3-twothird">
-<canvas id="canvas" width="1000px" height="600px" style="border:solid;" class="w3-margin">
-                        sfg canvas
+     
+      
+
+      
+
+<!-----Panel-->
+    <div id="sc" class="w3-row">
+        <div class="w3-quarter ">
+            <div class=" w3-bar-block   w3-xlarge w3-margin-top w3-border w3-passion w3-peach"   >
+                <button onclick="accordian('access')"  class="w3-button  w3-block w3-border w3-peach  w3-left-align">  ACCESSIBILITY <i class="material-icons">dehaze</i></button>
+                <div id="access" class="w3-hide w3-animate-zoom w3-light-peach">
+                <a class="w3-bar-item  w3-button " id= "zoomIn" onclick="sfg.zoomIn()" >Zoom In<i class="material-icons">zoom_in</i></a>
+                <a  class="w3-bar-item w3-button "  id= "zoomOut" onclick="sfg.zoomOut()"  >Zoom Out <i class="material-icons">zoom_out</i></a>
+                <a  class="w3-bar-item w3-button "  id= "reFit" onclick="sfg.reFit()"  >Re-fit<i class="material-icons">aspect_ratio</i></a>
+                <a class="w3-bar-item  w3-button "href="" onclick="download_image()">Download as PNG<i class="material-icons">file_download</i></a>
+                  </div>
+              
+                <button onclick="accordian('add')"  class="w3-button w3-block w3-border  w3-peach   w3-left-align" > ADD <i class="material-icons">dehaze</i> </button>
+                <div id="add" class="w3-hide w3-animate-zoom w3-light-peach">
+               
+                
+                <a  class="w3-bar-item  w3-button " id= "addArcEdge" onclick="addArcEdge()" >Add arc line <i class="material-icons">redo</i></a>
+                <a  class="w3-bar-item   w3-button " id= "addLineEdge" onclick="addLineEdge()" >Add straight line <i class="material-icons">trending_flat</i></a>
+                <a  class="w3-bar-item w3-button " id= "addNode" onclick="addNode()">Add node <i class="material-icons">add_circle</i></a>
+                    </div>
+                <a  class="w3-bar-item w3-button w3-border  w3-hover-pale-yellow" id= "editLabel" onclick="editLabel()">EDIT LABEL <i class="material-icons">edit</i></a>
+                <a  class="w3-bar-item w3-button w3-border  w3-hover-red" id= "deleteItem" onclick="deleteItem()">DELETE SELECTED <i class="material-icons">delete</i></a>
+                <a  class="w3-bar-item w3-button w3-border w3-hover-orange" id= "clear" onclick="clearAll()">CLEAR <i class="material-icons">delete_forever</i></a>
+               
+                <a href="#sc" class="w3-bar-item w3-button   w3-hover-green"id= "solve" onclick="solve() ;hideElement() ">SOLVE <i class="material-icons">lightbulb_outline</i></a>
+
+                <button onclick="accordian('statusChange')" class="w3-button w3-block w3-peach   w3-left-align"> CHANGE STATUS <i class="material-icons">dehaze</i></button>
+                <div id="statusChange" class="w3-hide w3-animate-zoom  w3-light-peach">
+               
+                    <a class="w3-bar-item w3-button " onclick="showForwardPaths()" >Forward Paths <i class="material-icons">import_export</i></a>
+                    <a class="w3-bar-item w3-button " onclick="showLoops()" >Loop Paths <i class="material-icons">loop</i> </a>
+                    </div>
+             
+                <div class=" w3-bar-item w3-center w3-pale-red  w3-border">
+                    <h4 id="pathslisttitle" title="Click on change status to alter the value" class="w3-passion w3-xxlarge"  >Status:None</h4>
+                  </div>
+                <a  class=" w3-button W3-pale-green w3-round w3-border" id="showAnswer" style="display:none"  onclick="document.getElementById('answer').style.display='block'">SHOW ANSWER<i class="material-icons">remove_red_eye</i></a>
+                
+                 
+
+        </div>
+        </div>
+    
+    <div class="w3-threequarter">
+<canvas id="canvas" width="900px" height="600px" style="border:solid;background-color:white" class="w3-margin-left w3-margin-top">
+    sfg canvas
 </canvas>
-</div>
-<div class="w3-third">
-
-<div class="w3-row">
 
 
-    <div style="width:200px;overflow-y:auto;display:inline-block" title="click on a symbol to change its value">
-        <table id="symtable" class="mytable w3-margin ">
+
+
+    <div style="display:inline-block;overflow-y: auto;margin-bottom:50px;margin-left:40px" title="click on a symbol to change its value">
+        <table id="symtable" class="w3-table-all w3-passion  w3-centered w3-hoverable ">
             <tr>
-                <th> Symbol </th>
-                <th> Value </th>
+                <th   style="background-color: #FFE5B4;"> Symbol </th>
+                <th  style="background-color: #FFE5B4;"> Value </th>
             </tr>
         </table>
     </div>
+    <div style="overflow-x:auto" class="w3-passion">
+        <table id="pathslist" class="w3-table-all w3-margin beta w3-hoverable" >
+        </table>
+    
+</div>
       
 
   
-            <div style="width:200px;overflow-y:auto">
-                <table id="pathslist" class="mytable w3-margin">
-                </table>
-            
-        </div>
-      
 
 
 
 
-    
-    <a class="w3-button w3-large w3-black w3-hover-light-blue w3-margin" onclick="showForwardPaths()" > Forward Paths</a>
-            <a class="w3-button w3-large w3-black w3-hover-light-blue w3-margin" onclick="showLoops()" > Loops </a>
-        <div class="w3-card">
-          <h3 id="pathslisttitle" title="click on a path or a loop to mark it" class="w3-center w3-animate-zoom"> loops </h3>
-          </div>
+       
+     
+        
 
+
+</div>
 
 </div>
  
-  </div>
-        
-  </div>
-  
 
   
-    
-    
-
-
-<div style="clear:left" class="w3-margin">
-    
-    <div id="results" >
+ <!-- The Modal for the answer (popup) -->
+ <div id="answer" class="w3-modal w3-xlarge">
+    <div class="w3-modal-content w3-animate-bottom  w3-card-4">
+        <header class="w3-container w3-teal ">
+            <span onclick="document.getElementById('answer').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+            <h2 class="w3-xlarge">Answer</h2>
+          </header>
+      
+                        
+                <div style="clear:left;overflow-x: auto;" class="w3-margin w3-container w3-row">
+                    
+                    <div class='w3-medium' id="results" >
+                    </div>
+                </div>
+                
+                <div id="debug">
+                </div>
+                        
+      
+          <footer class="w3-container w3-teal w3-xlarge">
+            <p>Created by Muhammad Qaiyum bin Jamaludin (B081810522)</p>
+          </footer>
     </div>
-  </div>
+    </div>
   
-  <div id="debug">
-  </div>
-                  
-                  
-  </div>
+    
+    
 
-</div>
+
+
 
     
   </body>

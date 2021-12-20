@@ -25,6 +25,7 @@
                 width: 100%;
             } */
             .w3-light-peach{background-color: #fff0d4;}
+            .w3-pastel-yellow{background-color: #FFC0CB;}
         </style>
         <script type="text/javascript">
             var sfg = null;
@@ -67,12 +68,16 @@
             function showForwardPaths(){
                 var title = document.getElementById("pathslisttitle");
                 title.innerHTML = "Status:Forward Paths";
+                document.getElementById("typeOfPath").className="w3-pastel-yellow w3-bar-item w3-center   w3-border";
+                title.insertAdjacentHTML("beforeend","<i class='material-icons'>import_export</i>")
                 showPaths(paths,"Path");
             }
 
             function showLoops(){
                 var title = document.getElementById("pathslisttitle");
                 title.innerHTML = "Status:Loop Paths";
+                document.getElementById("typeOfPath").className="w3-pale-blue  w3-bar-item w3-center   w3-border";
+                title.insertAdjacentHTML("beforeend","<i class='material-icons'>loops</i>")
                 showPaths(loops,"Loop");
             }
 
@@ -132,9 +137,11 @@
                         }
                         return str;
                     }
+               
+                    
+                 
                     document.getElementById('answer').style.display='block'
                     document.getElementById('showAnswer').style.display='block'
-                    window.scrollTo(0,document.body.scrollHeight);
                     document.getElementById("results");
                     results.innerHTML = "";
                     var symHTML = "<h3> Symbolic </h3>";
@@ -163,7 +170,7 @@
                     destLabel = result.destLabel;
                     
                     showLoops();
-                    
+                    window.scrollTo(0,document.body.scrollHeight);
                 });
 
                 
@@ -294,7 +301,7 @@
                 <h2>Why use Signal Flow Graph Solver?</h2>
                 <p>Sparked from the problem faced by engineering students, this program was design in a way to help them solve complicated Signal Flow Graph with responsive graphical interface.</p>
                 <h2>How to use the program?</h2>
-                <p>By accessing the sidebar, the users could add/remove nodes, connect nodes, set gain values for connections,view signal paths in foward or loop configuration,produce a solution and download the drawn SFG  </p>
+                <p>By accessing the sidebar, the users could add/remove nodes, connect nodes, edit connections label,set gain values for connections,view signal paths in foward or loop configuration,produce a solution and download the drawn SFG  </p>
               </div>
           
               <footer class="w3-container w3-teal">
@@ -338,11 +345,11 @@
                 <button onclick="accordian('statusChange')" class="w3-button w3-block w3-peach   w3-left-align"> CHANGE STATUS <i class="material-icons">dehaze</i></button>
                 <div id="statusChange" class="w3-hide w3-animate-zoom  w3-light-peach">
                
-                    <a class="w3-bar-item w3-button " onclick="showForwardPaths()" >Forward Paths <i class="material-icons">import_export</i></a>
+                    <a class="w3-bar-item w3-button " onclick="showForwardPaths()" >Forward Paths <i class='material-icons'>import_export</i></a>
                     <a class="w3-bar-item w3-button " onclick="showLoops()" >Loop Paths <i class="material-icons">loop</i> </a>
                     </div>
              
-                <div class=" w3-bar-item w3-center w3-pale-red  w3-border">
+                <div id="typeOfPath"class=" w3-bar-item w3-center w3-pale-red  w3-border">
                     <h4 id="pathslisttitle" title="Click on change status to alter the value" class="w3-passion w3-xxlarge"  >Status:None</h4>
                   </div>
                 <a  class=" w3-button W3-pale-green w3-round w3-border" id="showAnswer" style="display:none"  onclick="document.getElementById('answer').style.display='block'">SHOW ANSWER<i class="material-icons">remove_red_eye</i></a>

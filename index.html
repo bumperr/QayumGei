@@ -12,6 +12,8 @@
         <link rel="stylesheet" href="sfg.css" type="text/css"/>
         <script type="text/javascript" src="sfg.js"></script>
         <style>
+            .blue-header{background-color:#2A9BCB}
+            .white-text{color:#FFFFFF}
             .col-lg-8{
                 position: static;
             }
@@ -20,12 +22,12 @@
             html { scroll-behavior: smooth;}
 
             .w3-passion {font-family: 'Passion One', cursive;}
-            .w3-peach{background-color: #FFE5B4;}
+            .w3-peach{background-color: #D2CEC6;}
             /* #canvas {
                 width: 100%;
             } */
-            .w3-light-peach{background-color: #fff0d4;}
-            .w3-pastel-yellow{background-color: #FFC0CB;}
+            .w3-light-peach{background-color: #F1E9DB;}
+            .w3-pastel-yellow{background-color: #A39B8B;}
         </style>
         <script type="text/javascript">
             var sfg = null;
@@ -68,7 +70,7 @@
             function showForwardPaths(){
                 var title = document.getElementById("pathslisttitle");
                 title.innerHTML = "Status:Forward Paths";
-                document.getElementById("typeOfPath").className="w3-pastel-yellow w3-bar-item w3-center   w3-border";
+                document.getElementById("typeOfPath").className="w3-pale-blue w3-bar-item w3-center   w3-border";
                 title.insertAdjacentHTML("beforeend","<i class='material-icons'>import_export</i>")
                 showPaths(paths,"Path");
             }
@@ -273,8 +275,8 @@
                     }
         </script>
   </head>
-  <body onload = "init()"  style="background-color:#FFDDCA"  >
-    <header class="w3-container  w3-padding" style="background-color:#C48189;" id="myHeader">
+  <body onload = "init()"  style="background-color:#5DB7DE"  >
+    <header class="w3-container  w3-padding" style="background-color:#5DB7DE;" id="myHeader">
         <i onclick="w3_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i> 
         <div class="w3-center">
             <h3>Muhammad Qaiyum bin Jamaludin (B081810522)</h3>
@@ -289,7 +291,7 @@
         <!-- The Modal -->
         <div id="info" class="w3-modal">
         <div class="w3-modal-content w3-animate-bottom">
-            <header class="w3-container w3-teal ">
+            <header class="w3-container blue-header ">
                 <span onclick="document.getElementById('info').style.display='none'" class="w3-button w3-display-topright">&times;</span>
                 <h2>Signal Flow Graph (S.F.G)</h2>
               </header>
@@ -304,7 +306,7 @@
                 <p>By accessing the sidebar, the users could add/remove nodes, connect nodes, edit connections label,set gain values for connections,view signal paths in foward or loop configuration,produce a solution and download the drawn SFG  </p>
               </div>
           
-              <footer class="w3-container w3-teal">
+              <footer class="w3-container blue-header">
                 <p>Created by Muhammad Qaiyum bin Jamaludin (B081810522) </p>
               </footer>
         </div>
@@ -319,7 +321,7 @@
 <!-----Panel-->
     <div id="sc" class="w3-row">
         <div class="w3-quarter ">
-            <div class=" w3-bar-block   w3-xlarge w3-margin-top w3-border w3-passion w3-peach"   >
+            <div class=" w3-bar-block   w3-xlarge w3-margin-top w3-border w3-passion w3-peach "   >
                 <button onclick="accordian('access')"  class="w3-button  w3-block w3-border w3-peach  w3-left-align">  ACCESSIBILITY <i class="material-icons">dehaze</i></button>
                 <div id="access" class="w3-hide w3-animate-zoom w3-light-peach">
                 <a class="w3-bar-item  w3-button " id= "zoomIn" onclick="sfg.zoomIn()" >Zoom In<i class="material-icons">zoom_in</i></a>
@@ -370,8 +372,8 @@
     <div style="display:inline-block;overflow-y: auto;margin-bottom:50px;margin-left:40px" title="click on a symbol to change its value">
         <table id="symtable" class="w3-table-all w3-passion  w3-centered w3-hoverable ">
             <tr>
-                <th   style="background-color: #FFE5B4;"> Symbol </th>
-                <th  style="background-color: #FFE5B4;"> Value </th>
+                <th   style="background-color: #D2CEC6;"> Symbol </th>
+                <th  style="background-color: #D2CEC6;"> Value </th>
             </tr>
         </table>
     </div>
@@ -401,7 +403,7 @@
  <!-- The Modal for the answer (popup) -->
  <div id="answer" class="w3-modal w3-xlarge">
     <div class="w3-modal-content w3-animate-bottom  w3-card-4">
-        <header class="w3-container w3-teal ">
+        <header class="w3-container blue-header ">
             <span onclick="document.getElementById('answer').style.display='none'" class="w3-button w3-display-topright">&times;</span>
             <h2 class="w3-xlarge">Answer</h2>
           </header>
@@ -417,7 +419,7 @@
                 </div>
                         
       
-          <footer class="w3-container w3-teal w3-xlarge">
+          <footer class="w3-container blue-header w3-xlarge">
             <p>Created by Muhammad Qaiyum bin Jamaludin (B081810522)</p>
           </footer>
     </div>
